@@ -4,7 +4,7 @@
         <name>InstagramAuth</name>
         <description>Auth helper</description>        
         
-		<js-module src="www/instaauth.js" name="Instagram">
+		<js-module src="www/instaauth.js" name="InstagramAuth">
 			<clobbers target="window.instagram" />
 		</js-module>
         <engines>
