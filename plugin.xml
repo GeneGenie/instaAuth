@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+    <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+            id="com.plugin.instagramAuth" version="0.1.0">
+        <name>InstagramAuth</name>
+        <description>Auth helper</description>        
+        
+		<js-module src="www/instaauth.js" name="Instagram">
+			<clobbers target="window.instagram" />
+		</js-module>
+        <engines>
+			<engine name="cordova" version=">=3.3.0" />			
+		</engines>
+		<platform name="android">			
+			<config-file target="config.xml" parent="/*">
+				<feature name="InstagramAuth">
+					<param name="android-package" value="com.plugin.instagramAuth.InstagramAuth"/>
+				</feature>
+			</config-file>
+			<source-file src="src/android/InstagramAuth.java"  target-dir="src/com/plugin/instagramAuth" />
+			<source-file src="src/android/InstagramApp.java" target-dir="src/br/com/dina/oauth/instagram" />
+			<source-file src="src/android/InstagramDialog.java" target-dir="src/br/com/dina/oauth/instagram" />
+			<source-file src="src/android/InstagramSession.java" target-dir="src/br/com/dina/oauth/instagram" />
+		</platform>
+		
+    </plugin>
