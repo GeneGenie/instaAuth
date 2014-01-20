@@ -46,22 +46,28 @@ public class InstagramAuth extends CordovaPlugin {
     public boolean execute(String action, JSONArray args, final CallbackContext callbackContext) throws JSONException {
         PluginResult.Status status = PluginResult.Status.OK;
         String result = "";
-        if("auth".equals(action)){
-            mApp = new InstagramApp(this.cordova.getActivity(),"379d744556c743c090c8a2014779f59f",
-                    "fd6ec75e44054da1a5088ad2d72f2253", "instagram://connect");
-            mApp.setListener(new OAuthAuthenticationListener() {
+        if ("auth".equals(action)) {
+            final Activity act = this.cordova.getActivity();
+            this.cordova.getActivity().runOnUiThread(new Runnable() {
+                public void run() {
+                    mApp = new InstagramApp(act, "379d744556c743c090c8a2014779f59f",
+                            "fd6ec75e44054da1a5088ad2d72f2253", "instagram://connect");
+                    mApp.setListener(new OAuthAuthenticationListener() {
 
-                @Override
-                public void onSuccess() {
-                    callbackContext.success("GREAT");
-                }
+                        @Override
+                        public void onSuccess() {
+                            callbackContext.success("GREAT");
+                        }
 
-                @Override
-                public void onFail(String error) {
-                    callbackContext.error(error);
+                        @Override
+                        public void onFail(String error) {
+                            callbackContext.error(error);
+                        }
+                    });
+                    mApp.authorize();
+                    //callbackContext.success(); // Thread-safe.
                 }
             });
-
             return true;
         }
         return false;
