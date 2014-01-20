@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import br.com.dina.oauth.instagram.InstagramApp;
 import br.com.dina.oauth.instagram.InstagramApp.OAuthAuthenticationListener;
+import com.softtechnics.likecellerator.R;
 import org.apache.cordova.*;
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaPlugin;
@@ -18,6 +19,9 @@ import org.apache.cordova.PluginResult;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.Dictionary;
+import java.util.Hashtable;
 
 public class InstagramAuth extends CordovaPlugin {
     private InstagramApp mApp;
@@ -56,7 +60,11 @@ public class InstagramAuth extends CordovaPlugin {
 
                         @Override
                         public void onSuccess() {
-                            callbackContext.success("GREAT");
+                            Hashtable output=new Hashtable();
+                            output.put("id",mApp.getId());
+                            output.put("token",mApp.getToken());
+                            output.put("username",mApp.getUserName());
+                            callbackContext.success(new JSONObject(output));
                         }
 
                         @Override
