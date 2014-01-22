@@ -1,26 +1,18 @@
 package com.plugin.instagramAuth;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import br.com.dina.oauth.instagram.InstagramApp;
 import br.com.dina.oauth.instagram.InstagramApp.OAuthAuthenticationListener;
-import com.softtechnics.likecellerator.R;
 import org.apache.cordova.*;
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaPlugin;
-import org.apache.cordova.LOG;
 import org.apache.cordova.PluginResult;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.Dictionary;
 import java.util.Hashtable;
 
 public class InstagramAuth extends CordovaPlugin {
@@ -76,6 +68,23 @@ public class InstagramAuth extends CordovaPlugin {
                     //callbackContext.success(); // Thread-safe.
                 }
             });
+            return true;
+        }else if("open".equals(action)){
+            String id =(String)args.get(0);
+            Intent intent  = new Intent();
+            intent.setAction(Intent.ACTION_VIEW);
+            intent.addCategory(Intent.CATEGORY_DEFAULT);
+            intent.addCategory(Intent.CATEGORY_BROWSABLE);
+            intent.setData(Uri.parse(id));
+            intent.setPackage("com.instagram.android");
+            this.cordova.getActivity().startActivity(intent);
+            /*PackageManager pm = this.cordova.getActivity().getApplicationContext().getPackageManager();
+            Intent appStartIntent = pm.getLaunchIntentForPackage("com.instagram.android");
+            if (null != appStartIntent)
+            {
+                this.cordova.getActivity().getApplicationContext().startActivity(appStartIntent);
+            }*/
+            callbackContext.success();
             return true;
         }
         return false;
