@@ -78,12 +78,16 @@ public class InstagramAuth extends CordovaPlugin {
             intent.setData(Uri.parse(id));
             intent.setPackage("com.instagram.android");
             this.cordova.getActivity().startActivity(intent);
-            /*PackageManager pm = this.cordova.getActivity().getApplicationContext().getPackageManager();
+
+            callbackContext.success();
+            return true;
+        }else if("openApp".equals(action)){
+            PackageManager pm = this.cordova.getActivity().getApplicationContext().getPackageManager();
             Intent appStartIntent = pm.getLaunchIntentForPackage("com.instagram.android");
             if (null != appStartIntent)
             {
                 this.cordova.getActivity().getApplicationContext().startActivity(appStartIntent);
-            }*/
+            }
             callbackContext.success();
             return true;
         }
