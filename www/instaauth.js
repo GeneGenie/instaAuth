@@ -1,4 +1,3 @@
-cordova.define("com.plugin.instagramAuth.InstagramAuth", function(require, exports, module) {
  var exec = require('cordova/exec');
 
 Instagram = {
@@ -10,6 +9,3 @@ Instagram = {
     }
 }
 module.exports = Instagram;
-
-
-  });
