@@ -31,8 +31,8 @@ public class InstagramDialog extends Dialog {
 	static final float[] DIMENSIONS_LANDSCAPE = { 460, 260 };
 	static final float[] DIMENSIONS_PORTRAIT = { 280, 420 };
 	static final FrameLayout.LayoutParams FILL = new FrameLayout.LayoutParams(
-			ViewGroup.LayoutParams.FILL_PARENT,
-			ViewGroup.LayoutParams.FILL_PARENT);
+			ViewGroup.LayoutParams.WRAP_CONTENT,
+			ViewGroup.LayoutParams.WRAP_CONTENT);
 	static final int MARGIN = 4;
 	static final int PADDING = 2;
 
@@ -142,6 +142,9 @@ public class InstagramDialog extends Dialog {
 			}
 			Log.d(TAG, "onPageFinished URL: " + url);
 			mSpinner.dismiss();
+            //mWebView.setLayoutParams(FILL);
+            //mWebView.getContentHeight();
+
 		}
 
 	}
